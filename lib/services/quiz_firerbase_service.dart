@@ -3,6 +3,7 @@ import 'package:firebase_provider/models/quiz.dart';
 
 class QuizFirerbaseService {
   final _questionCollection = FirebaseFirestore.instance.collection('quizzes');
+
   Stream<QuerySnapshot> getQuestions() async* {
     yield* _questionCollection.snapshots();
   }
