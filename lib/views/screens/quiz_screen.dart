@@ -16,6 +16,7 @@ class _QuizScreenState extends State<QuizScreen> {
   int _curPage = 0;
   final Map<int, bool> _answeredQuestion = {};
   final _pageController = PageController();
+
   void _onAnswerSelected(int pageIndex, bool isAnswered) {
     setState(() {
       _answeredQuestion[pageIndex] = isAnswered;

@@ -10,11 +10,15 @@ class QuizController extends ChangeNotifier {
     return _questionFirebaseService.getQuestions();
   }
 
-  void addProduct(Quiz quiz) {
+  void addQuestion(Quiz quiz) {
     _questionFirebaseService.addQuestion(quiz);
   }
 
-  // void editProduct(String id, String title) {
-  //   _questionFirebaseService.edidQuestion(quiz);
-  // }
+  void editQuestion(String id, String title) {
+    // _questionFirebaseService.edidQuestion(id, title);
+  }
+
+  void deleteQuestion() {
+    // _questionFirebaseService.deleteQuestion()
+  }
 }
