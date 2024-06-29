@@ -34,9 +34,6 @@ class _AlternativesWidgetState extends State<AlternativesWidget> {
                 CheckboxListTile(
                   value: _chosenaAnswer == i,
                   onChanged: (value) {
-                    // setState(() {
-                    //   useranswer[i] = value!;
-                    // });
                     _chosenaAnswer = i;
                     setState(() {});
                   },
