@@ -2,6 +2,7 @@ import 'package:firebase_provider/controllers/quiz_controller.dart';
 import 'package:firebase_provider/models/quiz.dart';
 import 'package:firebase_provider/views/widgets/first_page_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -24,21 +25,53 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void _nextPage() {
-    if (_curPage < _answeredQuestion.length - 1) {
-      _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
-      setState(() {
-        _curPage++;
-      });
-    }
+    // if (_curPage < _answeredQuestion.length - 1) {
+    _pageController.nextPage(
+        duration: const Duration(milliseconds: 300), curve: Curves.bounceOut);
+    // setState(() {
+    // _curPage++;
+    // });
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
     final quizController = context.read<QuizController>();
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              onTap: () {
+                // showDialog(context: context, builder: (ctx) => {});
+              },
+              contentPadding: EdgeInsets.all(10),
+              tileColor: Colors.amber,
+              title: Text("Add Question"),
+              trailing: Icon(Icons.keyboard_arrow_right),
+            ),
+            Gap(10),
+            ListTile(
+              contentPadding: EdgeInsets.all(10),
+              tileColor: Colors.amber,
+              title: Text("Edit Question"),
+              trailing: Icon(Icons.keyboard_arrow_right),
+            ),
+            Gap(10),
+            ListTile(
+              contentPadding: EdgeInsets.all(10),
+              tileColor: Colors.amber,
+              title: Text("Delete Question"),
+              trailing: Icon(Icons.keyboard_arrow_right),
+            )
+          ],
+        ),
+      ),
+      appBar: AppBar(
+        backgroundColor: Colors.green,
+        title: const Text("Wlecome to our quiz!"),
+        centerTitle: true,
+      ),
       backgroundColor: Color.fromARGB(255, 205, 22, 237),
       body: StreamBuilder(
           stream: quizController.list,
@@ -61,22 +94,27 @@ class _QuizScreenState extends State<QuizScreen> {
                 : Center(
                     child: PageView.builder(
                       controller: _pageController,
-                      itemCount: questions.length,
-                      onPageChanged: (index) {
-                        _curPage = index;
-                      },
+                      itemCount: questions.length + 1,
                       itemBuilder: (BuildContext context, int index) {
-                        final question = Quiz.fromJson(questions[index]);
-                        return AlternativesWidget(
-                          question: question,
-                        );
+                        if (index == questions.length) {
+                          return FlutterLogo(
+                            size: 100,
+                          );
+                        } else {
+                          final question = Quiz.fromJson(questions[index]);
+                          return AlternativesWidget(
+                            question: question,
+                          );
+                        }
                       },
                     ),
                   );
           }),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            _answeredQuestion[_curPage] == true ? _nextPage : null;
+            _pageController.nextPage(
+                duration: Duration(seconds: 1), curve: Curves.linear);
+            // true == true ? _nextPage : null;
           },
           label: const Text('Next')),
     );

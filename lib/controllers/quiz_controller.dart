@@ -14,8 +14,8 @@ class QuizController extends ChangeNotifier {
     _questionFirebaseService.addQuestion(quiz);
   }
 
-  void editQuestion(String id, String title) {
-    // _questionFirebaseService.edidQuestion(id, title);
+  void editQuestion(Quiz quiz) {
+    _questionFirebaseService.edidQuestion(quiz);
   }
 
   void deleteQuestion() {
