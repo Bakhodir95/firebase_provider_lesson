@@ -25,13 +25,8 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void _nextPage() {
-    // if (_curPage < _answeredQuestion.length - 1) {
     _pageController.nextPage(
         duration: const Duration(milliseconds: 300), curve: Curves.bounceOut);
-    // setState(() {
-    // _curPage++;
-    // });
-    // }
   }
 
   @override
@@ -114,7 +109,6 @@ class _QuizScreenState extends State<QuizScreen> {
           onPressed: () {
             _pageController.nextPage(
                 duration: Duration(seconds: 1), curve: Curves.linear);
-            // true == true ? _nextPage : null;
           },
           label: const Text('Next')),
     );
